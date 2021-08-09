@@ -18,6 +18,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]) {
   exit;
 }
 
+
 // Define variables and initialize with empty values
 $username = $password = ""; // variables value input
 $username_err = $password_err = $login_err = ""; // variables error input
@@ -30,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Check if username is empty
   if (empty(trim($_POST["username"]))) {
     $username_err = "Please enter username.";
+  } else if (!filter_input(INPUT_POST, 'username', FILTER_VALIDATE_EMAIL)) {
+    $username_err = "Email address not valid";
   } else {
     $username = trim($_POST["username"]);
   }
@@ -60,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 5. Attempt to execute the prepared statement
     if ($stmt->execute()) {
-    
+
       // 6. Check if username exists, if yes then verify password
       if ($stmt->rowCount() == 1) {
 
