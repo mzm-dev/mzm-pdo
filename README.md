@@ -1,4 +1,4 @@
-# mzm-mysqli
+# MZM PDO
 Example MySQL for PDO PHP
 
 > framework is always more feasible than coding in the pure language.
